@@ -1,1 +1,60 @@
-<div><span id=dbg>G3</span></div><textarea autocapitalize=none autocomplete=on autofocus cols=99 id=zz placeholder="Start writing here"rows=99 spellcheck=false></textarea><script>var zz=document.getElementById("zz");function save(){setTimeout(function(){localStorage.setItem("a",zz.value),save()},6e4)}zz.value=localStorage.getItem("a")||"",zz.onkeydown=function(e){"Enter"!=e.key&&13!=e.which||setTimeout(function(e){for(var t=e.selectionStart,n=e.value,a="",l=t-2;0<=l&&"\n"!=n[l];l--)a=n[l]+a;var o=a.substring(0,a.length-a.trimLeft().length);e.value=n.slice(0,t)+o+n.slice(t),e.selectionStart=e.selectionEnd=t+o.length},.01,this)},save()</script>
+<html>
+	<div>
+		<span id="dbg">H1</span>
+	</div>
+	<textarea id="zz" autocapitalize="none" autocomplete="on" autofocus="true" 
+		  placeholder="Start writing here" spellcheck="false" cols="30" rows="30"></textarea>
+	<script type="text/javascript">
+var zz = document.getElementById('zz');
+var downContent = zz.value = localStorage.getItem('a') || '';
+zz.onkeydown = function(e) {
+  downContent = zz.value;
+  if (e.key == 'Enter' || e.which == 13) {
+    setTimeout(function(that) {
+      var start = that.selectionStart;
+      if (start == 0) return;
+      var v = that.value;
+      var thisLine = '';
+      for (var i = start - 2; i >= 0 && v[i] != '\n'; i--) {
+        thisLine = v[i] + thisLine;
+      }
+      var indentation = thisLine.substring(0, thisLine.length - thisLine.trimLeft().length);
+      var tail = thisLine.trimRight().slice(-1);
+      if (':{(['.indexOf(tail) > -1)
+        indentation += '\t';
+      that.value = (v.slice(0, start) + indentation + v.slice(start));
+      that.selectionStart = that.selectionEnd = start + indentation.length;
+    }, 0.01, this);
+  }
+};
+
+function save() {
+  setTimeout(function() {
+    localStorage.setItem('a', zz.value);
+    save();
+  }, 30 * 1000);
+}
+save();
+var pairs = {
+  '(': ')',
+  '{': '}',
+  '[': ']'
+};
+zz.onkeyup = function(kb) {
+  var content = zz.value;
+  if (content.length <= downContent.length) return;
+  var ix = zz.selectionStart;
+  if (ix == 0) return;
+  var chr = content[ix - 1];
+  var add = pairs[chr];
+  if (add) {
+    zz.value = content.slice(0, ix) + add + content.slice(ix);
+    zz.selectionStart = zz.selectionEnd = ix;
+  } else if (chr == ' ' && ix > 1 && ix < content.length && pairs[content[ix - 2]] == content[ix]) {
+    zz.value = content.slice(0, ix - 1) + content.slice(ix);
+    zz.selectionStart = zz.selectionEnd = ix;
+  }
+  downContent = zz.value;
+}
+	</script>
+</html>
