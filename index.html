@@ -4,25 +4,34 @@
 	<textarea id="zz" autocapitalize="none" autocomplete="on" autofocus="true" 
 		  placeholder="Start writing here" spellcheck="false" cols="99" rows="99"></textarea>
 	<script type="text/javascript">
-		var zz = zz || document.getElementById('zz');
-		document.getElementById('btn').onclick = function() {
-			document.getElementById('dbg').innerHTML = eval(zz.value);
-		};
-		zz.onkeydown = function(e) {
-		  if (e.key == 'Enter') {
-		    setTimeout(function(that) {
-		      var start = that.selectionStart;
-		      var v = that.value;
-		      var thisLine = '';
-		      for (var i = start - 2; i >= 0 && v[i] != '\n'; i--) {
-			thisLine = v[i] + thisLine;
-		      }
-		      var indentation = thisLine.substring(0, thisLine.length-thisLine.trimStart().length);
-		      that.value = (v.slice(0, start) + indentation + v.slice(start));
-		      that.selectionStart = start + indentation.length;
-		      that.selectionEnd = start + indentation.length;
-		    }, 0.01, this);
-		  }
-		};
+		var dbg = dbg || document.getElementById('dbg');
+		function dhuar(e) {
+		  dbg.innerHTML = e;
+		}
+		window.onerror = dhuar;
+		try {
+		  var zz = zz || document.getElementById('zz');
+		  document.getElementById('btn').onclick = function() {
+		    dhuar(eval(zz.value));
+		  };
+		  zz.onkeydown = function(e) {
+		    if (e.key == 'Enter') {
+		      setTimeout(function(that) {
+		        var start = that.selectionStart;
+		        var v = that.value;
+		        var thisLine = '';
+		        for (var i = start - 2; i >= 0 && v[i] != '\n'; i--) {
+		          thisLine = v[i] + thisLine;
+		        }
+		        var indentation = thisLine.substring(0, thisLine.length - thisLine.trimStart().length);
+		        that.value = (v.slice(0, start) + indentation + v.slice(start));
+		        that.selectionStart = start + indentation.length;
+		        that.selectionEnd = start + indentation.length;
+		      }, 0.01, this);
+		    }
+		  };
+		} catch (e) {
+		  dhuar(e.message);
+		}
 	</script>
 </html>
