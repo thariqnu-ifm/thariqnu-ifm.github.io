@@ -1,12 +1,8 @@
-<html>
-	<div id="dbg">c</div>
-	<div><button type="button" id="btn">eval</button></div>
-	<textarea id="zz" autocapitalize="none" autocomplete="on" autofocus="true" 
-		  placeholder="Start writing here" spellcheck="false" cols="99" rows="99"></textarea>
-	<script type="text/javascript">
 		var dbg = dbg || document.getElementById('dbg');
 		function dhuar(e) {
-		  dbg.innerHTML = e;
+      if(typeof e === 'object' || e instanceof Object)
+      	e = Object.getOwnPropertyNames(e);
+		  dbg.innerHTML = JSON.stringify(e);
 		}
 		window.onerror = dhuar;
 		try {
@@ -23,7 +19,7 @@
 		        for (var i = start - 2; i >= 0 && v[i] != '\n'; i--) {
 		          thisLine = v[i] + thisLine;
 		        }
-		        var indentation = thisLine.substring(0, thisLine.length - thisLine.trimStart().length);
+		        var indentation = thisLine.substring(0, thisLine.length - thisLine.trimLeft().length);
 		        that.value = (v.slice(0, start) + indentation + v.slice(start));
 		        that.selectionStart = start + indentation.length;
 		        that.selectionEnd = start + indentation.length;
@@ -33,5 +29,3 @@
 		} catch (e) {
 		  dhuar(e.message);
 		}
-	</script>
-</html>
