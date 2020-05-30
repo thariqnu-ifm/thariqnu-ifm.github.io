@@ -1,8 +1,14 @@
 <html>
-	<textarea id="zz" name="zz" autocapitalize="none" autocomplete="on" autofocus="true" 
+	<div id="dbg">a</div>
+	<div><button type="button" id="btn">eval</button></div>
+	<textarea id="zz" autocapitalize="none" autocomplete="on" autofocus="true" 
 		  placeholder="Start writing here" spellcheck="false" cols="99" rows="99"></textarea>
 	<script type="text/javascript">
-		document.getElementById('zz').addEventListener('keydown', function(e) {
+		var zz = zz || document.getElementById('zz');
+		document.getElementById('btn').onclick = function() {
+			document.getElementById('dbg').innerHTML = eval(zz.value);
+		};
+		zz.document.getElementById('zz').onkeydown = function(e) {
 		  if (e.key == 'Enter') {
 		    setTimeout(function(that) {
 		      var start = that.selectionStart;
@@ -17,6 +23,6 @@
 		      that.selectionEnd = start + indentation.length;
 		    }, 0.01, this);
 		  }
-		});
+		};
 	</script>
 </html>
