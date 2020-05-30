@@ -25,7 +25,7 @@ num() nums(?) parse(..) split(?) line()
 for tc in range(num()):
 	aa=nums()
 	aa.pop(0)
-	print(max(aa))
+	print("Case {}: {}".format(tc+1, max(aa)))
 #
 #
 #
