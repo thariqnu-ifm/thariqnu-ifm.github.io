@@ -1,1 +1,33 @@
-<html><div><span id="dbg">G1</span></div><textarea id="zz" autocapitalize="none" autocomplete="on" autofocus="true" placeholder="Start writing here" spellcheck="false" cols="99" rows="99"></textarea><script type="text/javascript">document.getElementById("zz").onkeydown=function(e){"Enter"!=e.key&&13!=e.which||setTimeout(function(e){for(var t=e.selectionStart,n=e.value,i="",l=t-2;l>=0&&"\n"!=n[l];l--)i=n[l]+i;var o=i.substring(0,i.length-i.trimLeft().length);e.value=n.slice(0,t)+o+n.slice(t),e.selectionStart=e.selectionEnd=t+o.length},.01,this)};</script></html>
+<html>
+	<div>
+		<span id="dbg">G2</span>
+	</div>
+	<textarea id="zz" autocapitalize="none" autocomplete="on" autofocus="true" 
+		  placeholder="Start writing here" spellcheck="false" cols="99" rows="99"></textarea>
+	<script type="text/javascript">
+var zz = document.getElementById('zz');
+zz.value = localStorage.getItem('a') || '';
+zz.onkeydown = function(e) {
+  if (e.key == 'Enter' || e.which == 13) {
+    setTimeout(function(that) {
+      var start = that.selectionStart;
+      var v = that.value;
+      var thisLine = '';
+      for (var i = start - 2; i >= 0 && v[i] != '\n'; i--) {
+        thisLine = v[i] + thisLine;
+      }
+      var indentation = thisLine.substring(0, thisLine.length - thisLine.trimLeft().length);
+      that.value = (v.slice(0, start) + indentation + v.slice(start));
+      that.selectionStart = that.selectionEnd = start + indentation.length;
+    }, 0.01, this);
+  }
+};
+function save() {
+	setTimeout(function() {
+  	localStorage.setItem('a', zz.value);
+  	save();
+  }, 60 * 1000);
+}
+save();
+	</script>
+</html>
