@@ -1,7 +1,14 @@
+<html>
+	<div id="dbg">E</div>
+	<div><button type="button" id="btn">eval</button></div>
+	<textarea id="zz" autocapitalize="none" autocomplete="on" autofocus="true" 
+		  placeholder="Start writing here" spellcheck="false" cols="99" rows="99"></textarea>
+	<script type="text/javascript">
 		var dbg = dbg || document.getElementById('dbg');
+
 		function dhuar(e) {
-      if(typeof e === 'object' || e instanceof Object)
-      	e = Object.getOwnPropertyNames(e);
+		  if (typeof e === 'object' || e instanceof Object)
+		    e = Object.getOwnPropertyNames(e);
 		  dbg.innerHTML = JSON.stringify(e);
 		}
 		window.onerror = dhuar;
@@ -29,3 +36,6 @@
 		} catch (e) {
 		  dhuar(e.message);
 		}
+
+	</script>
+</html>
