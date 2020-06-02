@@ -14,8 +14,8 @@ def split(ln=None): return (ln or line()).split()
 def parse(*parsers): return list(map((lambda p,w:p(w)),parsers,split()))
 def nums(o=None):
 	if o is not None:
-		if isinstance(o, int): return nums(lines(o))
-		if isinstance(o, str): o=split(o)
+		if isinstance(o, int): o=lines(o)
+		elif isinstance(o, str): o=split(o)
 	return list(map(int, o or split()))
 def num(): return int(line())
 #help("sys.modules")
