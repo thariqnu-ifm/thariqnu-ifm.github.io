@@ -2,6 +2,11 @@ import sys
 import collections
 import math
 import functools
+import itertools
+import bisect
+import operator
+import heapq
+import random
 true=True
 false=False
 null=None
