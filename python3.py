@@ -10,6 +10,10 @@ import random
 true=True
 false=False
 null=None
+def ceil(a,b):
+	ans=a//b
+	if a%b!=0: ans+=1
+	return ans
 def perr(*args,**kwargs): print(*args,file=sys.stderr,**kwargs)
 def line():
 	ln=sys.stdin.readline().strip()
@@ -27,13 +31,20 @@ def nums(o=None):
 def num(): return int(line())
 #help("sys.modules")
 """
+ceil(a,b)
 perr(print) true false null
 num() nums(?) parse(..) split(?) lines(n) line()
 """
 # 
 # 
-# 
+#
 
+#
+tcid=0
+while true:
+	tcid+=1
+	#
+	
 #
 #
 #
