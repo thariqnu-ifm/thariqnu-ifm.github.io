@@ -1,0 +1,18 @@
+<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+<input type="text" id="tb" autofocus="true" />
+<a target="_blank" id="btn1"><button type="button">AA</button></a>
+<a target="_blank" id="btn2"><button type="button">BB</button></a>
+<script>
+var tb = document.getElementById("tb");
+var btn1 = document.getElementById("btn1");
+var btn2 = document.getElementById("btn2");
+tb.oninput = function() {
+	var val = tb.value;
+	if(!isNaN(val)) {
+  	val = val + "";
+    val = "http://uva.onlinejudge.org/external/" + val.substr(0, val.length-2) + "/" + val + ".pdf";
+  }
+  btn2.href = "https://drive.google.com/viewerng/viewer?url=" + encodeURIComponent(val);
+	btn1.href = "https://drive.google.com/viewerng/viewer?embedded=true&url=" + encodeURIComponent(val);
+};
+</script>
