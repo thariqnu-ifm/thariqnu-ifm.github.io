@@ -12,7 +12,10 @@ false=False
 null=None
 tcid=0
 tcmax=99999999
-def sround(val,nd): return f'{val:.{nd}f}'
+def seq(lo,hi,step=1): 
+ return range(lo,hi+1,step)
+def sround(val,nd):
+ return f'{val:.{nd}f}'
 def ceil(a,b):
  ans=a//b
  if a%b!=0: ans+=1
@@ -36,23 +39,23 @@ def num(): return eval(line())
 """
 ceil(a,b) sround(val,nd) true false null
 num() nums(?) split(?) lines(n) line()
-perr(print) tcmax tcid
+perr(print) tcmax seq() tcid
 """
-# {{{
+#{#
 
-# }}}
-def solve(tcid=1):
+#}#
+def mainloop(tcid=1):
 # {{{
- exit()
+ 
 # }}}
 while tcid<tcmax:
  tcid+=1
- solve(tcid)
+ mainloop(tcid)
 """
-notes = .
+NOTES = .
 
 """
 """
-problem #id = .
-
+PROBLEM #ID = .
+10137
 """
