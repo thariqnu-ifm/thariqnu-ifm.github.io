@@ -12,6 +12,7 @@ false=False
 null=None
 tcid=0
 tcmax=99999999
+def compute(val, func): return func(val)
 def seq(lo,hi,step=1): 
  return range(lo,hi+1,step)
 def sround(val,nd):
@@ -39,7 +40,7 @@ def num(): return eval(line())
 """
 ceil(a,b) sround(val,nd) true false null
 num() nums(?) split(?) lines(n) line()
-perr(print) tcmax seq() tcid
+perr(print) tcmax seq() compute(v,f) tcid
 """
 #{#
 
