@@ -29,17 +29,19 @@ def line():
  return ln
 def lines(n): return [line() for i in range(n)]
 def split(ln=None): return (ln or line()).split()
+def num(str=None):
+ str=str or line()
+ return float(str) if '.' in str else int(str)
 def nums(o=None):
  if o is not None:
   if isinstance(o, int): o=lines(o)
   elif isinstance(o, str): o=split(o)
- return list(map(eval, o or split()))
-def num(): return eval(line())
+ return list(map(num, o or split()))
 #
 #help("sys.modules")
 """
 ceil(a,b) sround(val,nd) true false null
-num() nums(?) split(?) lines(n) line()
+num(?) nums(?) split(?) lines(n) line()
 perr(print) tcmax seq() compute(v,f) tcid
 """
 #{#
@@ -58,5 +60,5 @@ NOTES = .
 """
 """
 PROBLEM #ID = .
-10137
+
 """
