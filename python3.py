@@ -42,8 +42,6 @@ def nums(o=None):
   if isinstance(o, int): o=lines(o)
   elif isinstance(o, str): o=split(o)
  return list(map(num, o or split()))
-#
-#help("sys.modules")
 """
 ceil(a,b) sround(val,nd) true false null @memoi
 num(?) nums(?) split(?) lines(n) line()
@@ -60,10 +58,5 @@ while tcid<tcmax:
  tcid+=1
  mainloop(tcid)
 """
-NOTES = .
-
-"""
-"""
-PROBLEM #ID = .
 
 """
