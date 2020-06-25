@@ -10,9 +10,11 @@ import random
 true=True
 false=False
 null=None
+SLOW=True
 memoi=functools.lru_cache(None)
 tcid=0
 tcmax=99999999
+def fast(): SLOW=False
 def compute(val, func): return func(val)
 def seq(lo,hi,step=1): 
  return range(lo,hi+1,step)
@@ -22,7 +24,9 @@ def ceil(a,b):
  ans=a//b
  if a%b!=0: ans+=1
  return ans
-def perr(*args,**kwargs): print(*args,file=sys.stderr,**kwargs)
+def perr(*args,**kwargs): 
+ if SLOW:
+  print(*args,file=sys.stderr,**kwargs)
 def line():
  ln=sys.stdin.readline().strip()
  #perr(ln)
@@ -43,7 +47,7 @@ def nums(o=None):
 """
 ceil(a,b) sround(val,nd) true false null @memoi
 num(?) nums(?) split(?) lines(n) line()
-perr(print) tcmax seq() compute(v,f) tcid
+perr(print) tcmax seq() compute(v,f) tcid fast()
 """
 #{#
 
