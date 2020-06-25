@@ -10,6 +10,7 @@ import random
 true=True
 false=False
 null=None
+memoi=functools.lru_cache(None)
 tcid=0
 tcmax=99999999
 def compute(val, func): return func(val)
@@ -40,7 +41,7 @@ def nums(o=None):
 #
 #help("sys.modules")
 """
-ceil(a,b) sround(val,nd) true false null
+ceil(a,b) sround(val,nd) true false null @memoi
 num(?) nums(?) split(?) lines(n) line()
 perr(print) tcmax seq() compute(v,f) tcid
 """
