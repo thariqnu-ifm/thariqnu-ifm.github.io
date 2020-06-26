@@ -24,6 +24,41 @@ def ceil(a,b):
  ans=a//b
  if a%b!=0: ans+=1
  return ans
+def e1e(d,e): return d*(10**e)
+mod=e1e(1,9)+7
+class arrays(list):
+ def __init__(self,defval,*sizes):
+  self.sizes=sizes
+  self.dimension=len(sizes)
+  self.pm=pm=list(sizes)
+  pm.append(1)
+  for ii in reversed(range(self.dimension)): pm[ii]*=pm[ii+1]
+  list.__init__(self,itertools.repeat(defval,pm[0]))
+ def ___i1d___(self,ixs):
+  if not isinstance(ixs,tuple): return ixs
+  if len(ixs)!=self.dimension: raise LookupError(f'Dimension must be {self.dimension}.')
+  ans=0
+  for ii in range(self.dimension):
+   ix=ixs[ii]
+   if ix>=self.sizes[ii]:
+    raise IndexError(f'Index[{ii}]={ix} >= Len[{ii}]={self.sizes[ii]}.')
+   ans+=ix*self.pm[ii+1]
+  return ans
+ def __getitem__(self,ixs):
+  ixs=self.___i1d___(ixs)
+  return list.__getitem__(self,ixs)
+ def __setitem__(self,ixs,val):
+  ixs=self.___i1d___(ixs)
+  list.__setitem__(self,ixs,val)
+ def jagged(self,dim0,ofs):
+  if dim0+1==self.dimension: return self[ofs:ofs+self.sizes[dim0]]
+  ans=[]
+  for ii in range(self.sizes[dim0]):
+   ans.append(self.jagged(dim0+1,ofs))
+   ofs+=self.pm[dim0+1]
+  return ans
+ def __str__(self):
+  return str(self.jagged(0,0))
 def perr(*args,**kwargs): 
  if SLOW:
   print(*args,file=sys.stderr,**kwargs)
@@ -43,6 +78,7 @@ def nums(o=None):
   elif isinstance(o, str): o=split(o)
  return list(map(num, o or split()))
 """
+e1e(d,e) mod arrays(defv,*sz)
 ceil(a,b) sround(val,nd) true false null @memoi
 num(?) nums(?) split(?) lines(n) line()
 perr(print) tcmax seq() compute(v,f) tcid fast()
