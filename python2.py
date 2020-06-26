@@ -12,8 +12,6 @@ true=True
 false=False
 null=None
 SLOW=True
-tcid=0
-tcmax=99999999
 def fast(): SLOW=False
 def compute(val, func): return func(val)
 def seq(lo,hi,step=1): 
@@ -26,6 +24,14 @@ def ceil(a,b):
  return ans
 def e1e(d,e): return d*(10**e)
 mod=e1e(1,9)+7
+class memoi(dict):
+ def __init__(self,f):
+  self.f=f
+ def __call__(self,*args):
+  return self[args]
+ def __missing__(self,key):
+  ans=self[key]=self.f(*key)
+  return ans
 class arrays(list):
  def __init__(self,defval,*sizes):
   self.sizes=sizes
@@ -62,38 +68,8 @@ class arrays(list):
 def perr(*args,**kwargs): 
  if SLOW:
   print(*args,file=sys.stderr,**kwargs)
-def line():
- ln=sys.stdin.readline().strip()
- #perr(ln)
- if ln=='': sys.exit()
- return ln
-def lines(n): return [line() for i in range(n)]
-def split(ln=None): return (ln or line()).split()
-def num(str=None):
- str=str or line()
- return float(str) if '.' in str else int(str)
-def nums(o=None):
- if o is not None:
-  if isinstance(o, int): o=lines(o)
-  elif isinstance(o, str): o=split(o)
- return list(map(num, o or split()))
 """
 e1e(d,e) mod arrays(defv,*sz)
-ceil(a,b) sround(val,nd) true false null
-num(?) nums(?) split(?) lines(n) line()
-perr(print) tcmax seq() compute(v,f) tcid fast()
-"""
-#{#
-
-#}#
-def mainloop(tcid=1):
- null=None
-# {{{
- 
-# }}}
-while tcid<tcmax:
- tcid+=1
- mainloop(tcid)
-"""
-
+ceil(a,b) sround(val,nd) true false null @memoi
+perr(print) seq() compute(v,f) fast()
 """
