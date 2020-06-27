@@ -106,6 +106,6 @@ num(?) nums(?) split(?) lines(n) line()
 perr(print) seq() loop(f(tcid),?) compute(v,f) fast()
 """
 #
-def mainloop:
+def mainloop(tcid):
  ignored=1
 #
