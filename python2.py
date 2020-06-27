@@ -12,7 +12,13 @@ true=True
 false=False
 null=None
 SLOW=True
-def fast(): SLOW=False
+try:
+ range=xrange
+except:
+ ignored=1
+def fast():
+ global SLOW
+ SLOW=False
 def compute(val, func): return func(val)
 def seq(lo,hi,step=1): 
  return range(lo,hi+1,step)
@@ -24,14 +30,18 @@ def ceil(a,b):
  return ans
 def e1e(d,e): return d*(10**e)
 mod=e1e(1,9)+7
-class memoi(dict):
- def __init__(self,f):
-  self.f=f
- def __call__(self,*args):
-  return self[args]
- def __missing__(self,key):
-  ans=self[key]=self.f(*key)
-  return ans
+try:
+ memoi=functools.lru_cache(None)
+except:
+ class memoize(dict):
+  def __init__(self,f):
+   self.f=f
+  def __call__(self,*args):
+   return self[args]
+  def __missing__(self,key):
+   ans=self[key]=self.f(*key)
+   return ans
+ memoi=memoize
 class arrays(list):
  def __init__(self,defval,*sizes):
   self.sizes=sizes
@@ -68,8 +78,29 @@ class arrays(list):
 def perr(*args,**kwargs): 
  if SLOW:
   print(*args,file=sys.stderr,**kwargs)
+def line():
+ ln=sys.stdin.readline().strip()
+ #perr(ln)
+ if ln=='': sys.exit()
+ return ln
+def lines(n): return [line() for i in range(n)]
+def split(ln=None): return (ln or line()).split()
+def num(str=None):
+ str=str or line()
+ return float(str) if '.' in str else int(str)
+def nums(o=None):
+ if o is not None:
+  if isinstance(o, int): o=lines(o)
+  elif isinstance(o, str): o=split(o)
+ return list(map(num, o or split()))
+def loop(f,n=99999999):
+ for tcid in range(n): f(tcid+1)
 """
 e1e(d,e) mod arrays(defv,*sz)
 ceil(a,b) sround(val,nd) true false null @memoi
-perr(print) seq() compute(v,f) fast()
+num(?) nums(?) split(?) lines(n) line()
+perr(print) seq() loop(f(tcid),?) compute(v,f) fast()
 """
+
+def mainloop:
+ ignored=1
