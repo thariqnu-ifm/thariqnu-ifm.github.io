@@ -42,16 +42,15 @@ except:
    ans=self[key]=self.f(*key)
    return ans
  memoi=memoize
-class arrays(list):
- def __init__(self,defval,*sizes):
+class ndarray(list):
+ def __init__(self,defval,sizes):
   self.sizes=sizes
   self.dimension=len(sizes)
   self.pm=pm=list(sizes)
   pm.append(1)
   for ii in reversed(range(self.dimension)): pm[ii]*=pm[ii+1]
-  list.__init__(self,itertools.repeat(defval,pm[0]))
+  list.__init__(self,[defval]*pm[0])
  def ___i1d___(self,ixs):
-  if not isinstance(ixs,tuple): return ixs
   if len(ixs)!=self.dimension: raise LookupError('Dimension must be {}.'.format(self.dimension))
   ans=0
   for ii in range(self.dimension):
@@ -66,15 +65,20 @@ class arrays(list):
  def __setitem__(self,ixs,val):
   ixs=self.___i1d___(ixs)
   list.__setitem__(self,ixs,val)
- def jagged(self,dim0,ofs):
-  if dim0+1==self.dimension: return self[ofs:ofs+self.sizes[dim0]]
+ def _str_(self,dim0=0,ofs=0):
+  lft="  "*dim0
+  if dim0+1==self.dimension: return lft+str(list.__getitem__(self,slice(ofs,ofs+self.sizes[dim0])))
   ans=[]
   for ii in range(self.sizes[dim0]):
-   ans.append(self.jagged(dim0+1,ofs))
+   ans.append(self._str_(dim0+1,ofs))
    ofs+=self.pm[dim0+1]
+  ans="{0}[\n{1}\n{0}]".format(lft,",\n".join(ans))
   return ans
  def __str__(self):
-  return str(self.jagged(0,0))
+  return self._str_()
+def arrays(defval,*sizes):
+ if len(sizes)==1: return [defval]*sizes[0]
+ return ndarray(defval,sizes)
 def perr(*args,**kwargs): 
  if SLOW:
   print(*args,file=sys.stderr,**kwargs)
@@ -101,6 +105,7 @@ ceil(a,b) sround(val,nd) true false null @memoi
 num(?) nums(?) split(?) lines(n) line()
 perr(print) seq() loop(f(tcid),?) compute(v,f) fast()
 """
-
+#
 def mainloop:
  ignored=1
+#
