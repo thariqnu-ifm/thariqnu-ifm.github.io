@@ -1,13 +1,13 @@
 from __future__ import print_function
 import sys
-import collections
+from collections import deque,defaultdict
 import math
 import functools
 import itertools
-import bisect
+from bisect import bisect_left,bisect_right
 import operator
 import heapq
-import random
+from random import random,randint,randrange,shuffle
 true=True
 false=False
 null=None
@@ -51,11 +51,11 @@ class ndarray(list):
   for ii in reversed(range(self.dimension)): pm[ii]*=pm[ii+1]
   list.__init__(self,[defval]*pm[0])
  def ___i1d___(self,ixs):
-  if len(ixs)!=self.dimension: raise LookupError('Dimension must be {}.'.format(self.dimension))
+  if SLOW and len(ixs)!=self.dimension: raise LookupError('Dimension must be {}.'.format(self.dimension))
   ans=0
   for ii in range(self.dimension):
    ix=ixs[ii]
-   if ix>=self.sizes[ii]:
+   if SLOW and ix>=self.sizes[ii]:
     raise IndexError('Index[{}]={} >= Len[{}]={}.'.format(ii,ix,ii,self.sizes[ii]))
    ans+=ix*self.pm[ii+1]
   return ans
@@ -97,15 +97,34 @@ def nums(o=None):
   if isinstance(o, int): o=lines(o)
   elif isinstance(o, str): o=split(o)
  return list(map(num, o or split()))
-def loop(f,n=99999999):
- for tcid in range(n): f(tcid+1)
+def loop(f,n=0):
+ for tcid in range(n or 99999999): f(tcid+1)
+def repeat(n,f):
+ for _ in range(n): yield f()
+def recursi(root,fchildren,ctop):
+  p=deque()
+  c=deque()
+  q=deque()
+  q.append(root)
+  while len(q)>0:
+   pp=q.popleft()
+   for cc in fchildren(pp):
+    p.append(pp)
+    c.append(cc)
+    q.append(cc)
+  for _ in range(len(p)):
+   ctop(c.pop(),p.pop())
 """
-e1e(d,e) mod arrays(defv,*sz)
+recursi(root,fchilds,ctop)
+e1e(d,e) mod arrays(defv,*sz) repeat(n,f)
 ceil(a,b) sround(val,nd) true false null @memoi
 num(?) nums(?) split(?) lines(n) line()
-perr(print) seq() loop(f(tcid),?) compute(v,f) fast()
+perr(print) seq() loop(f(tcid),0) compute(v,f) fast()
 """
 #
-def mainloop(tcid):
- ignored=1
+def mainloop(tcid): #
+ ignored=1 #
+ 
+tcmax=0
+loop(mainloop,tcmax) #
 #
