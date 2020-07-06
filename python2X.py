@@ -4,7 +4,7 @@ from collections import deque,defaultdict
 import math
 import functools
 import itertools
-from bisect import bisect,bisect_left,bisect_right
+from bisect import bisect_left,bisect_right
 import operator
 import heapq
 from random import random,randint,randrange,shuffle
