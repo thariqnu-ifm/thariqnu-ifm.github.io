@@ -4,22 +4,25 @@ from collections import deque,defaultdict
 import math
 import functools
 import itertools
-from bisect import bisect_left,bisect_right
+from bisect import bisect,bisect_left,bisect_right
 import operator
 import heapq
 from random import random,randint,randrange,shuffle
 true=True
 false=False
 null=None
-SLOW=True
+reduce=functools.reduce
+slow=SLOW=__debug__
 try:
  range=xrange
 except:
- ignored=1
+ pass
 def fast():
  global SLOW
- SLOW=False
-def compute(val, func): return func(val)
+ global slow
+ slow=SLOW=False
+def div(a,b): return float(a)/b
+def compute(f,v): return f(v)
 def seq(lo,hi,step=1): 
  return range(lo,hi+1,step)
 def sround(val,nd):
@@ -51,12 +54,13 @@ class ndarray(list):
   for ii in reversed(range(self.dimension)): pm[ii]*=pm[ii+1]
   list.__init__(self,[defval]*pm[0])
  def ___i1d___(self,ixs):
-  if SLOW and len(ixs)!=self.dimension: raise LookupError('Dimension must be {}.'.format(self.dimension))
+  if SLOW:
+   assert len(ixs)==self.dimension, ('Dimension must be {}.'.format(self.dimension))
   ans=0
   for ii in range(self.dimension):
    ix=ixs[ii]
-   if SLOW and ix>=self.sizes[ii]:
-    raise IndexError('Index[{}]={} >= Len[{}]={}.'.format(ii,ix,ii,self.sizes[ii]))
+   if SLOW:
+    assert ix<self.sizes[ii], ('Index[{}]={} >= Len[{}]={}.'.format(ii,ix,ii,self.sizes[ii]))
    ans+=ix*self.pm[ii+1]
   return ans
  def __getitem__(self,ixs):
@@ -95,12 +99,10 @@ def num(str=None):
 def nums(o=None):
  if o is not None:
   if isinstance(o, int): o=lines(o)
-  elif isinstance(o, str): o=split(o)
+  #elif isinstance(o, str): o=split(o)
  return list(map(num, o or split()))
 def loop(f,n=0):
  for tcid in range(n or 99999999): f(tcid+1)
-def repeat(n,f):
- for _ in range(n): yield f()
 def recursi(root,fchildren,ctop):
   p=deque()
   c=deque()
@@ -113,17 +115,46 @@ def recursi(root,fchildren,ctop):
     c.append(cc)
     q.append(cc)
   for _ in range(len(p)):
-   ctop(c.pop(),p.pop())
+   ctop(c.pop(),p.pop())   
+def summod(*args):
+ sums=0
+ for vv in args:
+  sums=(sums+vv)%mod
+ return sums
+def multmod(*args):
+ ans=0
+ for vv in args:
+  ans=(ans+vv)%mod
+ return ans
+def subsmod(*args):
+ ans=0
+ for vv in args:
+  ans=(ans+mod-vv)%mod
+ return ans
+def matmultmod(a,b):
+ ra=len(a)
+ ca=len(a[0])
+ rb=len(b)
+ cb=len(b[0])
+ if SLOW:
+  assert ca==rb, "matrix incompatible size"
+ return [[summod(*map(lambda ii:a[rr][ii]*b[ii][cc],range(ca))) for cc in range(cb)] for rr in range(ra)]
+def yesno(b): return "YES" if b else "NO"
 """
+matmultmod() yesno()
+summod() multmod() subsmod()
 recursi(root,fchilds,ctop)
-e1e(d,e) mod arrays(defv,*sz) repeat(n,f)
+e1e(d,e) mod arrays(defv,*sz)
 ceil(a,b) sround(val,nd) true false null @memoi
 num(?) nums(?) split(?) lines(n) line()
-perr(print) seq() loop(f(tcid),0) compute(v,f) fast()
+perr(print) seq() loop(f(tcid),0) compute(f,v) fast()
 """
 #
 def mainloop(tcid): #
  ignored=1 #
+ def solve():
+  ignored=1 #
+  
  
 tcmax=0
 loop(mainloop,tcmax) #
