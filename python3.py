@@ -1,6 +1,6 @@
 import sys
 from collections import deque
-from bisect import bisect,bisect_left,bisect_right
+from bisect import bisect_left,bisect_right
 true,false=True,False
 null=none=None
 slow=__debug__
