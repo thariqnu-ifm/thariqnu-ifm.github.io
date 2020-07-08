@@ -1,33 +1,32 @@
 //#include<bits/stdc++.h>
+#include<algorithm>
+#include<assert.h>
+#include<bitset>
+#include<deque>
+#include<iomanip>
 #include<iostream>
+#include<list>
+#include<map>
+#include<math.h>
+#include<random>
+#include<set>
 #include<sstream>
 #include<string>
-#include<deque>
+#include<unordered_map>
+#include<unordered_set>
+#include<vector>
 using namespace std;
 typedef long long llong;
-int tcid=1;
-#define print(arr,separ) for(auto x:arr) = cout<<x<<separ;
-#define seq(i,a,b) for(i=a;i<=b;i++)
-stringstream cinln(){string s; if(getline(cin,s))return stringstream(s); exit(0);}
-#define cinln cinln()
+#define perr(begin,end) for(auto x=begin; x!=end; ++x) cerr<<*x<<" "; cerr<<endl
+#define seq(i,a,b) for(i=a;i<=b;++i)
+void fast() { ios_base::sync_with_stdio(false); cin.tie(NULL); }
+void precision(int n) { cout.precision(n); cout.setf(ios_base::fixed, ios_base::floatfield); }
 /*
- tcid=1
- cinln
- llong
+ fast() precision(n)
  seq(iter,lo,hi)
- print(arr,separ)
+ llong perr(begin,end)
 */
-int _next(){
- if(tcid==1){
- }else{
- }
- return 1;
-}
-void _mainloop(){
-}
+llong ii, jj, kk, tcid, tcmax;
 int main(){
- while(_next()) {
-  _mainloop();
-  tcid++;
- }
+ 
 }
