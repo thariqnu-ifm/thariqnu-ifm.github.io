@@ -1,16 +1,15 @@
 from __future__ import print_function
-import sys
-from collections import deque,defaultdict
-import math
+from bisect import bisect_right
+from collections import deque, defaultdict
 import functools
+from heapq import *
 import itertools
-from bisect import bisect_left,bisect_right
+import math
 import operator
-import heapq
-from random import random,randint,randrange,shuffle
-true=True
-false=False
-null=None
+from random import random, randint, randrange, shuffle
+import sys
+true,false=True,False
+null=none=None
 reduce=functools.reduce
 slow=SLOW=__debug__
 try:
@@ -154,7 +153,6 @@ def mainloop(tcid): #
  ignored=1 #
  def solve():
   ignored=1 #
-  
  
 tcmax=0
 loop(mainloop,tcmax) #
