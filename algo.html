@@ -2,6 +2,7 @@
 <div>
 	<a href="https://github.com/thariqnu-ifm/thariqnu-ifm.github.io/archive/master.zip" download="algo.zip"><button type="button">HTML</button></a>
 	<button id="simpan" type="button">Save</button>
+	<button id="undo" type="button">Undo</button>
 	<button id="bawah" type="button">bottom</button>
 	<button id="bawah2" type="button">bottom</button>
 	<button id="fokus" type="button">focus</button>
@@ -13,10 +14,15 @@
 var zz=document.getElementById("zz");
 function save() { 
 	localStorage.setItem("a",zz.value);
-	localStorage.setItem("b",[zz.selectionStart,zz.selectionEnd]);
+	localStorage.setItem("save",zz.value);
 }
 var downContent=zz.value=localStorage.getItem("a")||"";
-function autosave(){setTimeout(function(){save(),autosave()},1e4)}
+function autosave(){
+	setTimeout(function(){
+		localStorage.setItem("a",zz.value);
+		autosave();
+	},1e4);
+}
 //
 zz.onkeydown=function(e){downContent=zz.value,"Enter"!=e.key&&13!=e.which||setTimeout(function(e){var t=e.selectionStart;if(0!=t){for(var n=e.value,i="",l=t-2;0<=l&&"\n"!=n[l];l--)i=n[l]+i;var a=i.substring(0,i.length-i.trimLeft().length),o=i.trimRight().slice(-1);-1<":{([".indexOf(o)&&(a+=" "),e.value=n.slice(0,t)+a+n.slice(t),e.selectionStart=e.selectionEnd=t+a.length}},100,this)};var pairs={"(":")","{":"}","[":"]","'":"'",'"':'"'};zz.onkeyup=function(e){var t=zz.value;if(!(t.length<=downContent.length)){var n=zz.selectionStart;if(0!=n){var i=t[n-1],l=pairs[i];l?(zz.value=t.slice(0,n)+l+t.slice(n),zz.selectionStart=zz.selectionEnd=n):" "==i&&1<n&&n<t.length&&pairs[t[n-2]]==t[n]&&(zz.value=t.slice(0,n-1)+t.slice(n),zz.selectionStart=zz.selectionEnd=n),downContent=zz.value}}};
 //
@@ -32,13 +38,20 @@ function btm2() {
 	zz.scrollTop=zz.scrollHeight;
 }
 function postinit() {
-  autosave();
-  document.getElementById("simpan").onclick=save;
-  document.getElementById("bawah").onclick=btm;
+	autosave();
+	document.getElementById("simpan").onclick=save;
+	document.getElementById("bawah").onclick=btm;
 	document.getElementById("bawah2").onclick=btm2;
 	document.getElementById("fokus").onclick=fks;
-  zz.onblur=save;
-  setTimeout(function(){btm();btm2();},100);
+	zz.onblur=save;
+	setTimeout(function(){btm();btm2();},100);
+	document.getElementById("undo").onclick=function() {
+		var val = localStorage.getItem("save");
+		if(val) {
+			downContent=zz.value=val;
+			setTimeout(function(){btm();btm2();},100);
+		}
+	}
 }
 postinit();
 
