@@ -4,8 +4,6 @@
 	<button id="simpan" type="button">Save</button>
 	<button id="undo" type="button">Undo</button>
 	<button id="bawah" type="button">bottom</button>
-	<button id="bawah2" type="button">bottom</button>
-	<button id="fokus" type="button">focus</button>
 </div>
 <textarea autocapitalize=none autocomplete=on autofocus cols=150 id=zz placeholder="Start writing here"rows=10 spellcheck=false></textarea>
 
@@ -34,22 +32,17 @@ function btm() {
 	zz.selectionStart=zz.selectionEnd=zz.value.length;
 	fks();
 }
-function btm2() {
-	zz.scrollTop=zz.scrollHeight;
-}
 function postinit() {
 	autosave();
 	document.getElementById("simpan").onclick=function(){save(true);};
 	document.getElementById("bawah").onclick=btm;
-	document.getElementById("bawah2").onclick=btm2;
-	document.getElementById("fokus").onclick=fks;
 	zz.onblur=function(){save();};
-	setTimeout(function(){btm();btm2();},100);
+	setTimeout(function(){btm();},100);
 	document.getElementById("undo").onclick=function() {
 		var val = localStorage.getItem("save");
 		if(val) {
 			downContent=zz.value=val;
-			setTimeout(function(){btm();btm2();},100);
+			setTimeout(function(){btm();},100);
 		}
 	}
 }
