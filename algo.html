@@ -1,5 +1,11 @@
 <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
-<div><a href="https://github.com/thariqnu-ifm/thariqnu-ifm.github.io/archive/master.zip" download="algo.zip"><button type="button">HTML</button></a><button id="simpan" type="button">Save</button><button id="bawah" type="button">bottom</button></div>
+<div>
+	<a href="https://github.com/thariqnu-ifm/thariqnu-ifm.github.io/archive/master.zip" download="algo.zip"><button type="button">HTML</button></a>
+	<button id="simpan" type="button">Save</button>
+	<button id="bawah" type="button">bottom</button>
+	<button id="bawah2" type="button">bottom</button>
+	<button id="fokus" type="button">focus</button>
+</div>
 <textarea autocapitalize=none autocomplete=on autofocus cols=150 id=zz placeholder="Start writing here"rows=10 spellcheck=false></textarea>
 
 <script>
@@ -16,6 +22,11 @@ zz.onkeydown=function(e){downContent=zz.value,"Enter"!=e.key&&13!=e.which||setTi
 //
 function btm() {
 	zz.selectionStart=zz.selectionEnd=zz.value.length;
+}
+function btm2() {
+	zz.scrollTop=zz.scrollHeight;
+}
+function fks() {
 	zz.blur();
 	zz.focus();
 }
@@ -23,14 +34,11 @@ function postinit() {
   autosave();
   document.getElementById("simpan").onclick=save;
   document.getElementById("bawah").onclick=btm;
+	document.getElementById("bawah2").onclick=btm2;
+	document.getElementById("fokus").onclick=fks;
   zz.onblur=save;
   var selarr = localStorage.getItem("b");
-  if(selarr && selarr.length) {
-		zz.selectionStart=selarr[0];
-		zz.selectionEnd=selarr[1];
-		zz.blur();
-		zz.focus();
-  } else btm();
+  btm();
 }
 postinit();
 
