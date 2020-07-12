@@ -12,14 +12,14 @@
 <script>
 
 var zz=document.getElementById("zz");
-function save() { 
+function save(manual) { 
 	localStorage.setItem("a",zz.value);
-	localStorage.setItem("save",zz.value);
+	if(manual) localStorage.setItem("save",zz.value);
 }
 var downContent=zz.value=localStorage.getItem("a")||"";
 function autosave(){
 	setTimeout(function(){
-		localStorage.setItem("a",zz.value);
+		save();
 		autosave();
 	},1e4);
 }
@@ -39,7 +39,7 @@ function btm2() {
 }
 function postinit() {
 	autosave();
-	document.getElementById("simpan").onclick=save;
+	document.getElementById("simpan").onclick=function(){save(true);};
 	document.getElementById("bawah").onclick=btm;
 	document.getElementById("bawah2").onclick=btm2;
 	document.getElementById("fokus").onclick=fks;
