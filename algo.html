@@ -1,12 +1,12 @@
 <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
-<div>
-	<a href="https://github.com/thariqnu-ifm/thariqnu-ifm.github.io/archive/master.zip" download="algo.zip"><button type="button">htm</button></a>
-	<button id="simpan" type="button">sav</button>
-	<button id="undo" type="button">undo</button>
-	<button id="bawah" type="button">btm</button>
-	<button id="salin" type="button">copy</button>
-</div>
 <textarea autocapitalize=none autocomplete=on autofocus cols=150 id=zz placeholder="Start writing here"rows=10 spellcheck=false></textarea>
+<div style="width:999px">
+    <textarea rows="1" cols="9" disabled style="resize:none">ABCDEFGHIJ</textarea>
+    <button id="simpan" type="button">sav</button>
+    <button id="undo" type="button">undo</button>
+    <button id="bawah" type="button">btm</button>
+    <a href="https://github.com/thariqnu-ifm/thariqnu-ifm.github.io/archive/master.zip" download="algo.zip"><button type="button">htm</button></a>
+</div>
 
 <script>
 	var zz=document.getElementById("zz");
@@ -53,15 +53,6 @@
 				setTimeout(btm,100);
 				simpan.style.color = 'black';
 			}
-		};
-		document.getElementById("salin").onclick=function() {
-			var selectionStart = zz.selectionStart;
-			var selectionEnd = zz.selectionEnd;
-			zz.select();
-			document.execCommand('copy');
-			zz.selectionStart=selectionStart;
-			zz.selectionEnd=selectionEnd;
-			fks();
 		};
 	}
 	postinit();
