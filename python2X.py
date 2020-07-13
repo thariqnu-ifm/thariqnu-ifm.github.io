@@ -1,5 +1,5 @@
 from __future__ import print_function
-from bisect import bisect_right
+from bisect import bisect_right,bisect_left,insort
 from collections import deque, defaultdict
 import functools
 from heapq import *
@@ -20,6 +20,10 @@ def fast():
  global SLOW
  global slow
  slow=SLOW=False
+def coal(*args):
+ for vv in args:
+  if vv is not None:
+   return vv
 def div(a,b): return float(a)/b
 def compute(f,v): return f(v)
 def seq(lo,hi,step=1): 
@@ -90,6 +94,7 @@ def line():
  #perr(ln)
  if ln=='': sys.exit()
  return ln
+def flush(): sys.stdout.flush()
 def lines(n): return [line() for i in range(n)]
 def split(ln=None): return (ln or line()).split()
 def num(str=None):
@@ -143,17 +148,9 @@ def yesno(b): return "YES" if b else "NO"
 matmultmod() yesno()
 summod() multmod() subsmod()
 recursi(root,fchilds,ctop)
-e1e(d,e) mod arrays(defv,*sz)
+coal() e1e(d,e) mod arrays(defv,*sz)
 ceil(a,b) sround(val,nd) true false null @memoi
-num(?) nums(?) split(?) lines(n) line()
+num(?) nums(?) split(?) lines(n) line() flush()
 perr(print) seq() loop(f(tcid),0) compute(f,v) fast()
 """
-#
-def mainloop(tcid): #
- ignored=1 #
- def solve():
-  ignored=1 #
- 
-tcmax=0
-loop(mainloop,tcmax) #
 #
