@@ -22,7 +22,7 @@
 		setTimeout(function(){
 			save();
 			autosave();
-			simpan.style.color = 'red';
+			simpan.style.color = (Math.random()<0.5) ? 'red' : 'black';
 		},1e4);
 	}
 	//
