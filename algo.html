@@ -11,17 +11,23 @@
 	<button id="splt" type="button">splt</button>
 	<button id="bawah" type="button">btm</button>
 	<a href="https://github.com/thariqnu-ifm/thariqnu-ifm.github.io/archive/master.zip" download="algo.zip"><button type="button">htm</button></a>
+	<span id="stat">1</span>s ago
 </div>
 
 <script>
 	var zz=document.getElementById("zz");
 	var simpan=document.getElementById("simpan");
+	var lastSaved = new Date();
 	function save(manual) { 
 		localStorage.setItem("a",zz.value);
 		if(manual===true) {
 			localStorage.setItem("save",zz.value);
 			simpan.style.color = 'black';
+			lastSaved = new Date();
 		}
+		var stat=document.getElementById("stat")
+		stat.innerText=Math.round((new Date()-lastSaved)/1000);
+		stat.style.color = (Math.random()<0.5) ? 'red' : 'black';
 	}
 	var downContent=zz.value=localStorage.getItem("a")||"";
 	function autosave(){
