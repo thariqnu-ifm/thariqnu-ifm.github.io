@@ -1,0 +1,90 @@
+<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+<div>
+	<textarea cols=150 id=yy rows=5 readonly></textarea>
+</div>
+<div>
+	<textarea autocapitalize=none autocomplete=on autofocus cols=150 id=zz placeholder="Start writing here"rows=10 spellcheck=false></textarea>
+</div>
+<div style="width:999px">
+	<button id="simpan" type="button">sav</button>
+	<button id="undo" type="button">undo</button>
+	<button id="splt" type="button">splt</button>
+	<button id="bawah" type="button">btm</button>
+	<a href="https://github.com/thariqnu-ifm/thariqnu-ifm.github.io/archive/master.zip" download="algo.zip"><button type="button">htm</button></a>
+	<span id="stat">1</span>s ago
+</div>
+
+<script>
+	var zz=document.getElementById("zz");
+	var simpan=document.getElementById("simpan");
+	var lastSaved = new Date();
+	function save(manual) { 
+		localStorage.setItem("notes.a",zz.value);
+		if(manual===true) {
+			localStorage.setItem("notes.save",zz.value);
+			simpan.style.color = 'black';
+			lastSaved = new Date();
+		}
+		var stat=document.getElementById("stat")
+		stat.innerText=Math.round((new Date()-lastSaved)/1000);
+		stat.style.color = (Math.random()<0.5) ? 'red' : 'black';
+	}
+	var downContent=zz.value=localStorage.getItem("notes.a")||"";
+	function autosave(){
+		setTimeout(function(){
+			save();
+			autosave();
+			simpan.style.color = (Math.random()<0.5) ? 'red' : 'black';
+		},1e4);
+	}
+	//
+	zz.onkeydown=function(e){downContent=zz.value,"Enter"!=e.key&&13!=e.which||setTimeout(function(e){var t=e.selectionStart;if(0!=t){for(var n=e.value,i="",l=t-2;0<=l&&"\n"!=n[l];l--)i=n[l]+i;var a=i.substring(0,i.length-i.trimLeft().length),o=i.trimRight().slice(-1);-1<":{([".indexOf(o)&&(a+=" "),e.value=n.slice(0,t)+a+n.slice(t),e.selectionStart=e.selectionEnd=t+a.length}},100,this)};var pairs={"(":")","{":"}","[":"]","'":"'",'"':'"'};zz.onkeyup=function(e){var t=zz.value;if(!(t.length<=downContent.length)){var n=zz.selectionStart;if(0!=n){var i=t[n-1],l=pairs[i];l?(zz.value=t.slice(0,n)+l+t.slice(n),zz.selectionStart=zz.selectionEnd=n):" "==i&&1<n&&n<t.length&&pairs[t[n-2]]==t[n]&&(zz.value=t.slice(0,n-1)+t.slice(n),zz.selectionStart=zz.selectionEnd=n),downContent=zz.value}}};
+	//
+	function fks() {
+		zz.blur();
+		zz.focus();
+	}
+	function btm() {
+		zz.selectionStart=zz.selectionEnd=zz.value.length;
+		fks();
+	}
+	function postinit() {
+		autosave();
+		simpan.onclick=function(){
+			save(true);
+			fks();
+		};
+		document.getElementById("bawah").onclick=btm;
+		zz.onblur=function(){save();};
+		setTimeout(btm,100);
+		document.getElementById("undo").onclick=function() {
+			var val = localStorage.getItem("notes.save");
+			if(val) {
+				downContent=zz.value=val;
+				setTimeout(btm,100);
+				simpan.style.color = 'black';
+			}
+		};
+		var yy = document.getElementById("yy");
+		yy.hidden = true;
+		var zzrows = zz.rows;
+		document.getElementById("splt").onclick=function() {
+			if(yy.hidden) {
+				zz.rows=5;
+				yy.disabled=false;
+				yy.hidden = false;
+				yy.value=zz.value;
+				yy.selectionStart=zz.selectionStart;
+				yy.selectionEnd=zz.selectionEnd;
+				yy.blur();
+				yy.focus();
+				yy.disabled=true;
+			}else{
+				yy.hidden = true;
+				zz.rows=zzrows;
+			}
+			fks();
+		};
+	}
+	postinit();
+</script>
