@@ -1,17 +1,18 @@
 <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+<div style="width:999px">
+	<button id="bawah" type="button">btm</button>
+	<button id="splt" type="button">splt</button>
+	<button id="undo" type="button">undo</button>
+	<button id="simpan" type="button">sav</button>
+	<span id="stat">0</span>s
+	<button id="clr" type="button">clr</button>
+	<a href="https://github.com/thariqnu-ifm/thariqnu-ifm.github.io/archive/master.zip" download="algo.zip"><button type="button">htm</button></a>
+</div>
 <div>
 	<textarea cols=150 id=yy rows=5 readonly></textarea>
 </div>
 <div>
 	<textarea autocapitalize=none autocomplete=on autofocus cols=150 id=zz placeholder="Start writing here"rows=10 spellcheck=false></textarea>
-</div>
-<div style="width:999px">
-	<button id="simpan" type="button">sav</button>
-	<button id="undo" type="button">undo</button>
-	<button id="splt" type="button">splt</button>
-	<button id="bawah" type="button">btm</button>
-	<a href="https://github.com/thariqnu-ifm/thariqnu-ifm.github.io/archive/master.zip" download="algo.zip"><button type="button">htm</button></a>
-	<span id="stat">1</span>s ago
 </div>
 
 <script>
@@ -38,7 +39,7 @@
 		},1e4);
 	}
 	//
-	zz.onkeydown=function(e){downContent=zz.value,"Enter"!=e.key&&13!=e.which||setTimeout(function(e){var t=e.selectionStart;if(0!=t){for(var n=e.value,i="",l=t-2;0<=l&&"\n"!=n[l];l--)i=n[l]+i;var a=i.substring(0,i.length-i.trimLeft().length),o=i.trimRight().slice(-1);-1<":{([".indexOf(o)&&(a+=" "),e.value=n.slice(0,t)+a+n.slice(t),e.selectionStart=e.selectionEnd=t+a.length}},100,this)};var pairs={"(":")","{":"}","[":"]","'":"'",'"':'"'};zz.onkeyup=function(e){var t=zz.value;if(!(t.length<=downContent.length)){var n=zz.selectionStart;if(0!=n){var i=t[n-1],l=pairs[i];l?(zz.value=t.slice(0,n)+l+t.slice(n),zz.selectionStart=zz.selectionEnd=n):" "==i&&1<n&&n<t.length&&pairs[t[n-2]]==t[n]&&(zz.value=t.slice(0,n-1)+t.slice(n),zz.selectionStart=zz.selectionEnd=n),downContent=zz.value}}};
+	zz.onkeydown=function(e){downContent=zz.value,"Enter"!=e.key&&13!=e.which||setTimeout(function(e){var t=e.selectionStart;if(0!=t){for(var n=e.value,i="",l=t-2;0<=l&&"\n"!=n[l];l--)i=n[l]+i;var a=i.substring(0,i.length-i.trimLeft().length),o=i.trimRight().slice(-1);-1<":{([".indexOf(o)&&(a+=" "),e.value=n.slice(0,t)+a+n.slice(t),e.selectionStart=e.selectionEnd=t+a.length}},100,this)};var pairs={"(":")","{":"}","[":"]","'":"'",'"':'"'};zz.onkeyup=function(e){var t=zz.value;if(!(t.length<=downContent.length)){var n=zz.selectionStart;if(0!=n){var i=t[n-1],l=pairs[i];l?(zz.value=t.slice(0,n)+l+t.slice(n),zz.selectionStart=zz.selectionEnd=n):" "==i&&1<n&&n<t.length&&(pairs[t[n-2]]==t[n] || (t[n-2]==' ' && "\"'})]".indexOf(t[n])>-1))&&(zz.value=t.slice(0,n-1)+t.slice(n),zz.selectionStart=zz.selectionEnd=n),downContent=zz.value}}};
 	//
 	function fks() {
 		zz.blur();
@@ -84,6 +85,10 @@
 				zz.rows=zzrows;
 			}
 			fks();
+		};
+		document.getElementById("clr").onclick=function() {
+			zz.value="";
+			save();
 		};
 	}
 	postinit();
