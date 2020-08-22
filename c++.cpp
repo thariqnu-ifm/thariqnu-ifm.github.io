@@ -18,15 +18,24 @@
 using namespace std;
 typedef long long llong;
 #define perr(begin,end) for(auto x=begin; x!=end; ++x) cerr<<*x<<" "; cerr<<endl
-#define seq(i,a,b) for(i=a;i<=b;++i)
+#define seq(i,lo,hi) for(llong i=lo;i<=hi;++i)
+#define rev(i,lo,hi) for(llong i=hi;i>=lo;--i)
 void fast() { ios_base::sync_with_stdio(false); cin.tie(NULL); }
 void precision(int n) { cout.precision(n); cout.setf(ios_base::fixed, ios_base::floatfield); }
 /*
  fast() precision(n)
- seq(iter,lo,hi)
+ seq(i64,lo,hi) rev(i64,lo,hi)
  llong perr(begin,end)
 */
-llong ii, jj, kk, tcid, tcmax;
-int main(){
+llong tcid=1, tcmax=1, mtc=0;
+int mloop(llong tcid) {
  
+}
+int main(){
+ // mtc=1;
+ if(mtc) cin >> tcmax;
+ while(tcid<=tcmax) {
+  mloop(tcid);
+  tcid++;
+ }
 }
