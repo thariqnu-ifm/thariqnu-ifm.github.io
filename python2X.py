@@ -34,8 +34,11 @@ def coal(*args):
   if vv is not None:
    return vv
 def div(a,b): return float(a)/b
+def rrange(*args): return reversed(range(*args))
 def seq(lo,hi,step=1): 
  return range(lo,hi+1,step)
+def rev(lo,hi,step=1):
+ return rrange(lo,hi+1,step)
 def sround(val,nd):
  return '{0:.{1}f}'.format(val,nd)
 def e1e(d,e): return d*(10**e)
@@ -165,7 +168,6 @@ def maxheappush(heap,vv):
  heappush(heap,(reverse(vv),vv))
 def maxheappop(heap):
  return heappop(heap)[1]
-def rrange(*args): return reversed(range(*args))
 def reduce(ff,*args,**kwargs):
  ans=kwargs.get("default")
  for bb in args:
@@ -225,10 +227,9 @@ coal* e1e(d,e) mod arrays(defv,*sz)
 @memoiz=del|scope
 div sround(val,nd) true false none null
 num(s?) nums(s..?) split(s?) lines(n) line flush
-perr(print) seq rrange fast ceil
+perr(print) seq/rev rrange fast ceil
 """
 tcmax=0 #
 
 for tcid in seq(1,tcmax or 9999999): #
  ignore=1 #
- 
