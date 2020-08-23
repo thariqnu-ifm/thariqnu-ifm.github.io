@@ -14,6 +14,10 @@ true,false=True,False
 null=none=None
 reduce=functools.reduce
 slow=SLOW=__debug__
+sys.setrecursionlimit(11111111)
+def testrec(n=1111111):
+ if n==0: return 0
+ return testrec(n-1)
 def getitem(lst,i0,default=None):
  if i0<len(lst) and i0>-1:
   return lst[i0]
@@ -222,7 +226,7 @@ fastpow(a,n,op,init_zero?):
 maxheappush maxheappop magic
 matmultmod yesno abcdef
 summod* multmod* subsmod primes
-bfs(fchilds:?,root*,ctop=)
+testrec bfs(fchilds:?,root*,ctop=)
 coal* e1e(d,e) mod arrays(defv,*sz)
 @memoiz=del|scope
 div sround(val,nd) true false none null
