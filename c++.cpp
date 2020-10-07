@@ -23,12 +23,13 @@ int FAST = 0;
 #define seq(i,lo,hi) for(llong i=lo;i<=hi;++i)
 #define rev(i,lo,hi) for(llong i=hi;i>=lo;--i)
 #define cinl(v) llong v; cin >> v
+#define mkarr(a,sz) llong a[sz]={}
 void fast() { FAST=1; ios_base::sync_with_stdio(false); cin.tie(NULL); }
 void precision(int n) { cout.precision(n); cout.setf(ios_base::fixed, ios_base::floatfield); }
 /*
  fast()   precision(n)
  seq/rev=(i64,lo,hi)   cinl
- llong   perr(begin,end)
+ llong   mkarr(a,sz)   perr(begin,end)
 */
 llong tcid=1, tcmax=1, mtc=0;
 void mloop(llong tcid) {
