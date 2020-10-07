@@ -26,9 +26,9 @@ int FAST = 0;
 void fast() { FAST=1; ios_base::sync_with_stdio(false); cin.tie(NULL); }
 void precision(int n) { cout.precision(n); cout.setf(ios_base::fixed, ios_base::floatfield); }
 /*
- fast() precision(n)
- seq/rev=(i64,lo,hi) cinl
- llong perr(begin,end)
+ fast()   precision(n)
+ seq/rev=(i64,lo,hi)   cinl
+ llong   perr(begin,end)
 */
 llong tcid=1, tcmax=1, mtc=0;
 void mloop(llong tcid) {
